@@ -35,7 +35,7 @@ class Database extends Config
 
 
 
-     
+     //checkkkk
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'localhost',
