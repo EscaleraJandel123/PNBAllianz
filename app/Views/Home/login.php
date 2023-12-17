@@ -2,7 +2,14 @@
 <html lang="en">
 
 <?= view('/Home/chop/head'); ?>
-
+<style>
+    .card-body {
+  padding: 0 5% 30px 5%; 
+  width: 100%; 
+  max-width: 600px;
+  box-sizing: border-box;
+}
+</style>
 <body>
 
 <main>
