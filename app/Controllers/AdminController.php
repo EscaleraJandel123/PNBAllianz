@@ -51,9 +51,12 @@ class AdminController extends BaseController
     }
     public function ManageAgent()
     {
-        // Assuming that AgentModel is the correct model for managing agents
+        $session = session();
+        if ($session->get('role') !== 'admin') {
+            return redirect()->to('/');
+        }
         $agentModel = new AgentModel();
-        $data = $this->getData();
+        $data = $this->usermerge();
 
         // Use the model to fetch all records
         $data['agent'] = $agentModel->findAll();
@@ -63,8 +66,12 @@ class AdminController extends BaseController
 
     public function ManageApplicant()
     {
+        $session = session();
+        if ($session->get('role') !== 'admin') {
+            return redirect()->to('/');
+        }
         $appmodel = new ApplicantModel();
-        $data = $this->getData();
+        $data = $this->usermerge();
 
         // Add a where condition to retrieve only records with status = 'confirmed'
         $applicants = $appmodel->where('status', 'pending')->paginate();
@@ -72,13 +79,28 @@ class AdminController extends BaseController
         $data['applicant'] = $applicants;
         $data['pager'] = $appmodel->pager;
 
+
         return view('Admin/ManageApplicant', $data);
     }
-
+    private function usermerge()
+    {
+        $session = session();
+        $userId = $session->get('id');
+        $data = $this->getDataAd();
+        $userModel = new UserModel();
+        $data['user'] = $userModel->find($userId);
+        return $data;
+    }
+    
     public function userSearch()
     {
+        $session = session();
+        if ($session->get('role') !== 'admin') {
+            return redirect()->to('/');
+        }
+        $userId = $session->get('id');
         $appmodel = new ApplicantModel();
-        $data = $this->getData();
+        $data = $this->usermerge();
 
         // Get the search input from the form
         $filterUser = $this->request->getPost('filterUser');
@@ -91,12 +113,18 @@ class AdminController extends BaseController
 
         return view('Admin/ManageApplicant', $data);
     }
+    
 
     // Controller method for searching agents by full name
     public function agentSearch()
     {
+        $session = session();
+        if ($session->get('role') !== 'admin') {
+            return redirect()->to('/');
+        }
+
         $agentModel = new AgentModel();
-        $data = $this->getData();
+        $data = $this->usermerge();
 
         // Get the search input from the form
         $filterUser = $this->request->getPost('filterAgent');
@@ -105,7 +133,6 @@ class AdminController extends BaseController
         $agents = $agentModel->like('Agentfullname', $filterUser)->findAll();
 
         $data['agent'] = $agents;
-
         return view('Admin/ManageAgent', $data);
     }
     private function getDataAd()
@@ -125,8 +152,13 @@ class AdminController extends BaseController
 
         return $data;
     }
+    
     public function AdProfile()
     {
+        $session = session();
+        if ($session->get('role') !== 'admin') {
+            return redirect()->to('/');
+        }
 
         $data = array_merge($this->getData(), $this->getDataAd());
         return view('Admin/AdProfile', $data);
@@ -134,12 +166,20 @@ class AdminController extends BaseController
 
     public function AdSetting()
     {
+        $session = session();
+        if ($session->get('role') !== 'admin') {
+            return redirect()->to('/');
+        }
         $data = array_merge($this->getData(), $this->getDataAd());
         return view('Admin/AdSetting', $data);
     }
 
     public function AdHelp()
     {
+        $session = session();
+        if ($session->get('role') !== 'admin') {
+            return redirect()->to('/');
+        }
         $data = $this->getData();
         return view('Admin/AdHelp', $data);
     }
@@ -161,6 +201,10 @@ class AdminController extends BaseController
     }
     public function ViewAppForm($id)
     {
+        $session = session();
+        if ($session->get('role') !== 'admin') {
+            return redirect()->to('/');
+        }
         // Load the Form1Model
         $form1Model = new Form1Model();
         // Find the form data based on the user ID
@@ -182,6 +226,7 @@ class AdminController extends BaseController
 
     public function newAgent()
     {
+
         $agent = new AgentModel();
         $userModel = new UserModel();
         $appmodel = new ApplicantModel();
