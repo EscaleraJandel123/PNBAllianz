@@ -53,7 +53,7 @@ class AdminController extends BaseController
     {
         // Assuming that AgentModel is the correct model for managing agents
         $agentModel = new AgentModel();
-        $data = $this->getData();
+        $data = array_merge($this->getData(), $this->getDataAd());
 
         // Use the model to fetch all records
         $data['agent'] = $agentModel->findAll();
@@ -64,7 +64,7 @@ class AdminController extends BaseController
     public function ManageApplicant()
     {
         $appmodel = new ApplicantModel();
-        $data = $this->getData();
+        $data = array_merge($this->getData(), $this->getDataAd());
 
         // Add a where condition to retrieve only records with status = 'confirmed'
         $applicants = $appmodel->where('status', 'pending')->paginate();
