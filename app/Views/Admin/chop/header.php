@@ -1,7 +1,7 @@
 <header class="navbar sticky-top flex-md-nowrap">
     <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
         <a class="navbar-brand" href="#">
-            ALLIANZ AGENT
+            ALLIANZ ADMIN
         </a>
     </div>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
