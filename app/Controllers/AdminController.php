@@ -79,8 +79,8 @@ class AdminController extends BaseController
         $data['applicant'] = $applicants;
         $data['pager'] = $appmodel->pager;
 
-        $userModel = new UserModel();
-        $data['user'] = $userModel->find($userId);
+        $admin = new AdminModel();
+        $data['admin'] = $admin->find($userId);
 
         return view('Admin/ManageApplicant', $data);
     }
