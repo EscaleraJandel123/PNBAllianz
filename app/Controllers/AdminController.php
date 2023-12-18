@@ -58,29 +58,19 @@ class AdminController extends BaseController
         // Use the model to fetch all records
         $data['agent'] = $agentModel->findAll();
 
-        
-
         return view('Admin/ManageAgent', $data);
     }
 
     public function ManageApplicant()
     {
-        $session = session();
-        if ($session->get('role') !== 'admin') {
-            return redirect()->to('/');
-        }
-        $userId = $session->get('id');
         $appmodel = new ApplicantModel();
-        $data = $this->getDataAd();
+        $data = $this->getData();
 
         // Add a where condition to retrieve only records with status = 'confirmed'
         $applicants = $appmodel->where('status', 'pending')->paginate();
 
         $data['applicant'] = $applicants;
         $data['pager'] = $appmodel->pager;
-
-        $userModel = new UserModel();
-        $data['user'] = $userModel->find($userId);
 
         return view('Admin/ManageApplicant', $data);
     }
