@@ -71,7 +71,7 @@ class AdminController extends BaseController
         }
         $userId = $session->get('id');
         $appmodel = new ApplicantModel();
-        $data = $this->getData();
+        $data = $this->getDataAd();
 
         // Add a where condition to retrieve only records with status = 'confirmed'
         $applicants = $appmodel->where('status', 'pending')->paginate();
@@ -79,8 +79,8 @@ class AdminController extends BaseController
         $data['applicant'] = $applicants;
         $data['pager'] = $appmodel->pager;
 
-        $admin = new AdminModel();
-        $data['admin'] = $admin->find($userId);
+        $userModel = new UserModel();
+        $data['user'] = $userModel->find($userId);
 
         return view('Admin/ManageApplicant', $data);
     }
