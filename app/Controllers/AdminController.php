@@ -59,6 +59,7 @@ class AdminController extends BaseController
         $data['agent'] = $agentModel->findAll();
 
         
+
         return view('Admin/ManageAgent', $data);
     }
 
@@ -77,9 +78,9 @@ class AdminController extends BaseController
 
         $data['applicant'] = $applicants;
         $data['pager'] = $appmodel->pager;
-        
+
         $userModel = new UserModel();
-        $data['admin'] = $userModel->find($userId);
+        $data['user'] = $userModel->find($userId);
 
         return view('Admin/ManageApplicant', $data);
     }
