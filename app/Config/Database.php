@@ -27,9 +27,9 @@ class Database extends Config
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'localhost',
-        'username'     => 'u775902507_PNBALLIANZ',
+        'username'     => 'u880494257_Erecruitagent',
         'password'     => 'PNBallianz2023',
-        'database'     => 'u775902507_erecruitment',
+        'database'     => 'u880494257_erecruitment',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,

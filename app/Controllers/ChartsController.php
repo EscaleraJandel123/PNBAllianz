@@ -11,9 +11,9 @@ class ChartsController extends BaseController
         header('Content-Type: application/json');
 
         $servername = "localhost";
-        $username = "u775902507_PNBALLIANZ";
+        $username = "u880494257_Erecruitagent";
         $password = "PNBallianz2023";
-        $database = "u775902507_erecruitment";
+        $database = "u880494257_erecruitment";
 
         $conn = new \mysqli($servername, $username, $password, $database);
 
@@ -54,9 +54,9 @@ class ChartsController extends BaseController
         header('Content-Type: application/json');
 
         $servername = "localhost";
-        $username = "u775902507_PNBALLIANZ";
+        $username = "u880494257_Erecruitagent";
         $password = "PNBallianz2023";
-        $database = "u775902507_erecruitment";
+        $database = "u880494257_erecruitment";
 
         $conn = new \mysqli($servername, $username, $password, $database);
 
